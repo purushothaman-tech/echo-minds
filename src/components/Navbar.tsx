@@ -1,9 +1,25 @@
 import { Link, useLocation } from "react-router-dom";
-import { Brain } from "lucide-react";
+import { Brain, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Navbar = () => {
   const location = useLocation();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -11,6 +27,7 @@ export const Navbar = () => {
     { path: "/", label: "Home" },
     { path: "/screening", label: "Screening" },
     { path: "/about", label: "About" },
+    { path: "/blog", label: "Resources" },
     { path: "/contact", label: "Contact" },
   ];
 
@@ -24,23 +41,38 @@ export const Navbar = () => {
             <span className="sm:hidden">ADS</span>
           </Link>
 
-          <ul className="flex items-center gap-1 sm:gap-2">
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                    isActive(link.path)
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {link.label}
+          <div className="flex items-center gap-4">
+            <ul className="hidden md:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className={cn(
+                      "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                      isActive(link.path)
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {user ? (
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/dashboard">
+                  <User className="mr-2 h-4 w-4" />
+                  Dashboard
                 </Link>
-              </li>
-            ))}
-          </ul>
+              </Button>
+            ) : (
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/auth">Login</Link>
+              </Button>
+            )}
+          </div>
         </div>
       </nav>
     </header>

@@ -75,13 +75,13 @@ const Index = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/screening">
+                <Link to="/auth">
                   <Button size="xl" variant="hero" className="w-full sm:w-auto">
-                    Start Screening
+                    Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="/about">
+                <Link to="/blog">
                   <Button size="xl" variant="outline" className="w-full sm:w-auto">
                     Learn More
                   </Button>
@@ -196,7 +196,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/screening">
+            <Link to="/auth">
               <Button size="lg" variant="hero">
                 Begin Your Assessment
               </Button>
