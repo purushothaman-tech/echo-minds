@@ -14,7 +14,131 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cognitive_tasks: {
+        Row: {
+          completion_time: number | null
+          created_at: string | null
+          details: Json | null
+          difficulty_level: string | null
+          id: string
+          score: number | null
+          screening_id: string
+          task_name: string
+          task_type: string
+        }
+        Insert: {
+          completion_time?: number | null
+          created_at?: string | null
+          details?: Json | null
+          difficulty_level?: string | null
+          id?: string
+          score?: number | null
+          screening_id: string
+          task_name: string
+          task_type: string
+        }
+        Update: {
+          completion_time?: number | null
+          created_at?: string | null
+          details?: Json | null
+          difficulty_level?: string | null
+          id?: string
+          score?: number | null
+          screening_id?: string
+          task_name?: string
+          task_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cognitive_tasks_screening_id_fkey"
+            columns: ["screening_id"]
+            isOneToOne: false
+            referencedRelation: "screening_results"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          accessibility_settings: Json | null
+          caregiver_for: string | null
+          created_at: string | null
+          date_of_birth: string | null
+          full_name: string | null
+          id: string
+          is_caregiver: boolean | null
+          language: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          accessibility_settings?: Json | null
+          caregiver_for?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          full_name?: string | null
+          id?: string
+          is_caregiver?: boolean | null
+          language?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          accessibility_settings?: Json | null
+          caregiver_for?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          full_name?: string | null
+          id?: string
+          is_caregiver?: boolean | null
+          language?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      screening_results: {
+        Row: {
+          ai_breakdown: Json | null
+          audio_analysis: Json | null
+          cognitive_scores: Json | null
+          created_at: string | null
+          id: string
+          personal_info: Json | null
+          recommendations: string[] | null
+          risk_level: string | null
+          risk_score: number | null
+          screening_date: string | null
+          user_id: string
+        }
+        Insert: {
+          ai_breakdown?: Json | null
+          audio_analysis?: Json | null
+          cognitive_scores?: Json | null
+          created_at?: string | null
+          id?: string
+          personal_info?: Json | null
+          recommendations?: string[] | null
+          risk_level?: string | null
+          risk_score?: number | null
+          screening_date?: string | null
+          user_id: string
+        }
+        Update: {
+          ai_breakdown?: Json | null
+          audio_analysis?: Json | null
+          cognitive_scores?: Json | null
+          created_at?: string | null
+          id?: string
+          personal_info?: Json | null
+          recommendations?: string[] | null
+          risk_level?: string | null
+          risk_score?: number | null
+          screening_date?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
