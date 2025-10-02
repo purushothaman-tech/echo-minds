@@ -69,6 +69,7 @@ Support for Families → Provides insights and peace of mind.
 Research Contribution → Builds valuable datasets for global dementia studies.
 
 ## PROTOTYPE FOR OUR COGNISCREEN AI
-**URL**: https://lovable.dev/projects/4338f567-831e-4d45-9e21-8ba6d3e5e58a
+**URL**: https://preview--lucid-mind-scan.lovable.app/
+
            
 
