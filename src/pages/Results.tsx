@@ -124,9 +124,15 @@ const Results = () => {
 
         {/* Actions */}
         <div className="grid sm:grid-cols-3 gap-4">
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/dashboard"><Home className="mr-2 h-5 w-5" />Dashboard</Link>
-          </Button>
+          {!isGuest ? (
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/dashboard"><Home className="mr-2 h-5 w-5" />Dashboard</Link>
+            </Button>
+          ) : (
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/auth"><User className="mr-2 h-5 w-5" />Sign Up to Save</Link>
+            </Button>
+          )}
           <Button variant="outline" size="lg" asChild>
             <Link to="/contact"><Phone className="mr-2 h-5 w-5" />Contact</Link>
           </Button>
